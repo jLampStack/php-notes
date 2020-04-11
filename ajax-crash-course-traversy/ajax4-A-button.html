@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AJAX 4 - PHP Form</title>
+</head>
+<body>
+
+  <h1>Button</h1>
+
+  <p>A basic button.</p>
+
+  <button id="button">Get Name</button><BR><BR>
+
+  <div>
+    <a href="ajax4-A-button.html">Button</a> | 
+    <a href="ajax4-B-php-action.html">PHP</a> |
+    <a href="ajax4-C-ajax.html">Ajax</a>
+  </div>
+
+  <script>
+
+    const btn = document.getElementById('button');
+    btn.addEventListener('click', getName);
+
+    function getName(e) {
+      // Prevent default action: Optional
+      e.preventDefault();
+      const xhr = new XMLHttpRequest();
+    
+      xhr.open( 'GET', 'process.php?name=Jay LampStack', true);
+    
+      // 2. Function to execute when the request completes successfully
+      xhr.onload = function() {
+        if(this.status == 200) {
+          console.log(this.responseText);
+        }
+      }
+      // 3. Send request to server
+      xhr.send();
+    }
+
+  </script>
+  
+</body>
+</html>

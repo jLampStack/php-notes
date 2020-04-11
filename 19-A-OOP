@@ -1,0 +1,59 @@
+<?php
+
+  // Represents a Person Object
+  class Person {
+    // Properties - Attributes in form of a variable
+    // Access modifiers 
+    // 1. public - access it from anywhere outside of class, global
+    // 2. private - best practice, only access within this class, more secure than protected
+    // 3. protected - access within this class plus any class that extends it
+    private $name;
+    private $email;
+
+    // Constructor as of PHP5
+    # instead of typing private $name, private $email etc.
+    public function __construct($name, $email)
+    {
+      echo __CLASS__ . ' __CLASS__ created <BR>';  // Magic Constant
+      $this->name = $name;
+      $this->email = $email;
+    }
+
+    // Destructor - Automatically run at compile time, no need to call below
+    public function __destruct() {
+      echo "Destroying " . __CLASS__ . "<BR>";
+    }
+
+
+    // Setters
+    public function setName($name) {
+      $this->name = $name;
+    }
+    
+    public function setEmail($email) {
+      $this->email = $email;
+    }
+
+    // Getters
+    public function getName() {
+      return $this->name . '<BR>';
+    }
+    
+    public function getEmail() {
+      return $this->email . '<BR>';
+    }
+
+  }
+
+  // Instantiate a Person Object, Instance of Person
+  // $person1 = new Person;
+  // Set Property: PHP uses dart, JS uses dot person1.name
+  // $person1->name = 'Jay LampStack'; # Example, but better to use getters/setters
+  // echo $person1->name;
+  //$person1->setName('Jay LampStack');  # Constructor approach is easier
+  //$person1->setEmail('jLampStack@gmail.com'); # Constructor approach is easier
+  $person1 = new Person('jay', 'test');
+  echo $person1->getName();
+  echo $person1->getEmail();
+
+  // $person1->__destruct();

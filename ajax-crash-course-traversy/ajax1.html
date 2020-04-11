@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AJAX 1 - Text File</title>
+</head>
+<body>
+  
+  <h1>Button</h1>
+
+  <p>A basic Button.</p> 
+
+  <button id="button" >Get Text File</button>
+  <BR><BR>
+  <div id="output"></div>
+
+  <script>
+    // Create Event Listener
+    const btn = document.getElementById('button');
+    const output = document.getElementById('output');
+
+    // Event Listener for Button
+    btn.addEventListener( 'click', loadText);
+    
+    function loadText() {
+      // Create XHR Object
+      const xhr = new XMLHttpRequest();
+
+
+      // console.log('READYSTATE: ' , xhr.readyState);
+
+      xhr.onload = function() {
+        // console.log('READYSTATE: ' , xhr.readyState);
+        if(this.status == 200 && this.readyState == 4) {
+          // console.log(this.responseText);
+          output.innerHTML = xhr.responseText;
+        }
+      }
+
+      // OPTIONAL - used for loaders
+      xhr.onprogress = function() {
+        // console.log('READYSTATE: ', xhr.readyState);
+      }
+
+      xhr.onload = function() {
+        // console.log('READYSTATE: ', xhr.readyState);
+        output.innerHTML = xhr.responseText;
+        if(this.status == 200) {
+          console.log();
+        } else if(this.status = 404) {
+          output.innerHTML = 'Not Found!';
+        }
+      }
+
+      // Should be used with onload
+      xhr.onerror = function() {
+        // console.log('Request Error...');
+      }
+
+
+      // xhr.onreadystatechange = function() {
+      //   // console.log('READYSTATE: ' , xhr.readyState);
+      //   if(this.readyState == 4 && this.status == 200) {
+      //     output.innerHTML = xhr.responseText;
+      //   }
+      // }
+
+
+      // OPEN - type, url/file, true/ false (true = async)
+      xhr.open('GET', 'sample.txt', true);
+      // Send request
+      xhr.send();
+    }
+
+
+    
+
+  </script>
+
+</body>
+</html>

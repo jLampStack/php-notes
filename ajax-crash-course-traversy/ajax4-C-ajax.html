@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AJAX 4 - PHP Form</title>
+</head>
+<body>
+  
+  <h1>Ajax Approach</h1>
+
+  <p>With Ajax there is no need to use the form attributes action or method since JavaScript is handling the submission. The form accepts an id attribute which is called upon in the script.</p> 
+
+  <!-- PHP Approach -->
+  <form id="form">
+    <input type="text" placeholder="Firstname" id="fname">
+    <input type="submit" name="name" value="Submit">
+  </form>
+
+  <p id="output"></p>
+
+  <div>
+    <a href="ajax4-A-button.html">Button</a> | 
+    <a href="ajax4-B-php-action.html">PHP</a> |
+    <a href="ajax4-C-ajax.html">Ajax</a>
+  </div>
+
+  <script>
+
+    const form = document.getElementById('form');
+    form.addEventListener('submit', getName);
+
+    function getName(e) {
+      // Prevent default action: Optional
+      e.preventDefault();
+    
+      const name = document.getElementById('fname').value;
+    
+      const xhr = new XMLHttpRequest();
+    
+      xhr.open( 'GET', 'process.php?name='+name, true);
+    
+      // 2. Function to execute when the request completes successfully
+      xhr.onload = function() {
+        if(this.status == 200) {
+          console.log(this.responseText);
+          document.getElementById('output').innerHTML = this.responseText;
+        }
+      }
+      // 3. Send request to server
+      xhr.send();
+    }
+
+  </script>
+  
+</body>
+</html>

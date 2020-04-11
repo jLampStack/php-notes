@@ -1,0 +1,2 @@
+This is the text I am inserting when we write to the file using fopen() and fclose()
+We can continuously write to the same file

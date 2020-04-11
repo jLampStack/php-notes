@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AJAX 2 - Local JSON</title>
+</head>
+<body>
+
+  <button id="button1">Get User</button>
+  <button id="button2">Get Users</button>
+  <br><br><br>
+
+  <h1>User</h1>
+  <div id="user"></div>
+
+  <h1>Users</h1>
+  <div id="users"></div>
+
+
+  <script>
+    // Target Buttons
+    const button1 = document.getElementById('button1');
+    const button2 = document.getElementById('button2');
+    // Target Output Div
+    const output1 = document.getElementById('user');
+    const output2 = document.getElementById('users');
+
+    // Buttons
+    button1.addEventListener( 'click', loadUser );
+    button2.addEventListener( 'click', loadUsers );
+
+    function loadUser() {
+      // Create XHR Object
+      const xhr = new XMLHttpRequest();
+    
+      // 1. Open File or URL
+      xhr.open( 'GET', 'user.json', true);
+    
+      // 2. Function to execute when the request completes successfully
+      xhr.onload = function() {
+        if(this.status == 200) {
+          // console.log(this.responseText);
+          const user = JSON.parse(this.responseText);
+          // console.log(user.name);
+          output1.innerHTML = `ID: ${user.id}<BR>Name: ${user.name}<BR>Email: ${user.email}<HR>`;
+        }
+      }
+     // 3. Send request to server
+      xhr.send();
+    }
+
+
+    function loadUsers() {
+      // Create XHR Object
+      const xhr = new XMLHttpRequest();
+    
+      // 1. Open File or URL
+      xhr.open( 'GET', 'users.json', true);
+    
+      // 2. Function to execute when the request completes successfully
+      xhr.onload = function() {
+        if(this.status == 200) {
+          // console.log(this.responseText);
+          const users = JSON.parse(this.responseText);
+          // console.log(users);
+          users.forEach( user => {
+            // console.log(user.name);
+            output2.innerHTML += 
+              `ID: ${user.id}<BR>Name: ${user.name}<BR>Email: ${user.email}<HR>`;
+          });
+        }
+      }
+     // 3. Send request to server
+      xhr.send();
+    }
+
+  </script>
+
+</body>
+</html>
